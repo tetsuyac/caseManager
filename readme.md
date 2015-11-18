@@ -1,5 +1,7 @@
-caseManager.1 Nov/3/2015, Tetsuya Chiba
+caseManager.2 Nov/18/2015, Tetsuya Chiba
 ===============
+
+20151118:configure node and mongo for hosting test.
 
 ###### installation (osx, linux) modify accordingly in case of windows.
 1. download caseManager.zip from <https://github.com/tetsuyac/caseManager.git>

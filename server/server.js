@@ -32,12 +32,12 @@ app.use(function (req, res, next) {
 process.on('uncaughtException', function (err) {
   if (err) console.log(err, err.stack);
 });
-//Local Connection
-var conn = 'mongodb://localhost/casemanager';
+
+var conn = DB.dbConn();
 var db = new DB.startup(conn);
-// Routes
+
 app.get('/', routes.index);
-// JSON API
+
 var baseUrl = '/api/dataservice/';
 app.get(baseUrl + 'Cases', api.cases);
 app.get(baseUrl + 'Case/:id', api.case);
@@ -52,7 +52,14 @@ app.post(baseUrl + 'Login', api.login);
 app.post(baseUrl + 'Logout', api.logout);
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
-// Start server
-app.listen(3000, function () {
-  console.log("CustMgr Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+
+//app.listen(3000, function () {
+//  console.log("CustMgr Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+//});
+
+var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080
+var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
+
+app.listen(server_port, server_ip_address, function () {
+  console.log( "Listening on " + server_ip_address + ", server_port " + server_port )
 });

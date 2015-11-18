@@ -1,44 +1,54 @@
-// Module dependencies
 var mongoose = require('mongoose')
   , Schema = mongoose.Schema
   , Case = require('./models/case')
   , State = require('./models/state')
   , util = require('util');
-// connect to database
+
+/*/provide a sensible default for local development
+mongodb_connection_string = 'mongodb://127.0.0.1:27017/' + db_name;
+//take advantage of openshift env vars when available:
+if (process.env.OPENSHIFT_MONGODB_DB_URL) {
+  mongodb_connection_string = process.env.OPENSHIFT_MONGODB_DB_URL + db_name;
+}*/
+
 module.exports = {
-  // Define class variable
-  myEventID: null,
-  // initialize DB
-  startup: function (dbToUse) {
+  dbName:"casemanager",
+  dbHost:"127.0.0.1",
+  dbPort:"27017",
+  dbConn:function() {
+    return (function() {
+      return 'mongodb://' + this.dbHost + ':' + this.dbPort + '/' + this.dbName;
+    }.bind(module.exports))();
+  },
+  myEventID:       null,
+  startup:         function (dbToUse) {
     mongoose.connect(dbToUse);
     // Check connection to mongoDB
     mongoose.connection.on('open', function () {
       console.log('We have connected to mongodb');
     });
   },
-  // disconnect from database
-  closeDB: function () {
+  closeDB:         function () {
     mongoose.disconnect();
   },
-  // get all the cases
-  getCases: function (skip, top, callback) {
+  getCases:        function (skip, top, callback) {
     console.log('*** accessDB.getCases');
     Case.count(function (err, custsCount) {
       var count = custsCount;
       console.log('Cases count: ' + count);
       Case.find({}, {
-        '_id':        0,
-        'case':       1,
-        'firstName':  1,
-        'lastName':   1,
-        'city':       1,
-        'state':      1,
-        'stateId':    1,
-        'entries':    1,
-        'orderCount': 1,
-        'gender':     1,
-        'id':         1
-      })
+          '_id':        0,
+          'case':       1,
+          'firstName':  1,
+          'lastName':   1,
+          'city':       1,
+          'state':      1,
+          'stateId':    1,
+          'entries':    1,
+          'orderCount': 1,
+          'gender':     1,
+          'id':         1
+        })
         /*
          //This stopped working (not sure if it's a mongo or mongoose change) so doing 2 queries now
          function (err, cases) {
@@ -49,29 +59,28 @@ module.exports = {
         .limit(top)
         .exec(function (err, cases) {
           callback(null, {
-            count:     count,
+            count: count,
             cases: cases
           });
         });
     });
   },
-  // get the case summary
   getCasesSummary: function (skip, top, callback) {
     console.log('*** accessDB.getCasesSummary');
     Case.count(function (err, custsCount) {
       var count = custsCount;
       console.log('Cases count: ' + count);
       Case.find({}, {
-        '_id':        0,
-        'case':       1,
-        'firstName':  1,
-        'lastName':   1,
-        'city':       1,
-        'state':      1,
-        'orderCount': 1,
-        'gender':     1,
-        'id':         1
-      })
+          '_id':        0,
+          'case':       1,
+          'firstName':  1,
+          'lastName':   1,
+          'city':       1,
+          'state':      1,
+          'orderCount': 1,
+          'gender':     1,
+          'id':         1
+        })
         /*
          //This stopped working (not sure if it's a mongo or mongoose change) so doing 2 queries now
          function (err, casesSummary) {
@@ -83,21 +92,19 @@ module.exports = {
         .limit(top)
         .exec(function (err, casesSummary) {
           callback(null, {
-            count:            count,
+            count:        count,
             casesSummary: casesSummary
           });
         });
     });
   },
-  // get a  case
-  getCase: function (id, callback) {
+  getCase:         function (id, callback) {
     console.log('*** accessDB.getCase');
     Case.find({'id': id}, {}, function (err, acase) {
       callback(null, acase[0]);
     });
   },
-  // insert a  case
-  insertCase: function (req_body, state, callback) {
+  insertCase:      function (req_body, state, callback) {
     console.log('*** accessDB.insertCase');
     var acase = new Case();
     var s = {'id': state[0].id, 'abbreviation': state[0].abbreviation, 'name': state[0].name}
@@ -120,7 +127,7 @@ module.exports = {
       callback(null, acase.id);
     });
   },
-  editCase: function (id, req_body, state, callback) {
+  editCase:        function (id, req_body, state, callback) {
     console.log('*** accessDB.editCase');
     var s = {'id': state[0].id, 'abbreviation': state[0].abbreviation, 'name': state[0].name}
     Case.findOne({'id': id}, {
@@ -156,15 +163,13 @@ module.exports = {
       });
     });
   },
-  // delete a case
-  deleteCase: function (id, callback) {
+  deleteCase:      function (id, callback) {
     console.log('*** accessDB.deleteCase');
     Case.remove({'id': id}, function (err, acase) {
       callback(null);
     });
   },
-  // get a  case's email
-  checkUnique: function (id, property, value, callback) {
+  checkUnique:     function (id, property, value, callback) {
     console.log('*** accessDB.checkUnique');
     console.log(id + ' ' + value)
     switch (property) {
@@ -179,15 +184,13 @@ module.exports = {
       break;
     }
   },
-  // get all the states
-  getStates: function (callback) {
+  getStates:       function (callback) {
     console.log('*** accessDB.getStates');
     State.find({}, {}, {sort: {name: 1}}, function (err, states) {
       callback(null, states);
     });
   },
-  // get a state
-  getState: function (stateId, callback) {
+  getState:        function (stateId, callback) {
     console.log('*** accessDB.getState');
     State.find({'id': stateId}, {}, function (err, state) {
       callback(null, state);
