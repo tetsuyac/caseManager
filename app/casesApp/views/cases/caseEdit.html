@@ -1,0 +1,175 @@
+<div class="view">
+  <div class="container">
+    <header>
+      <h3><span class="glyphicon glyphicon-edit"></span> {{vm.title}} Case</h3>
+    </header>
+    <form name="editForm" novalidate>
+      <div class="caseEdit">
+        <div class="row">
+          <div class="col-md-12">
+            <h4>{{ vm.case.firstName + ' ' + vm.case.lastName }} <span data-ng-hide="vm.case.id == 0">(<a
+              style="font-size:12pt" href="#/caseentries/{{vm.case.id}}">View Entries</a>)</span></h4>
+            <br/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+            Case:
+          </div>
+          <div class="col-md-10">
+            <input type="text" name="case" class="form-control" data-ng-model="vm.case.case" required/>
+            <br/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+            First Name:
+          </div>
+          <div class="col-md-10">
+            <input type="text" name="firstName" class="form-control" data-ng-model="vm.case.firstName" required/>
+                        <span class="errorMessage" ng-show="editForm.firstName.$touched && editForm.firstName.$invalid">
+                            First name is required
+                        </span>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col-md-2">
+            Last Name:
+          </div>
+          <div class="col-md-10">
+            <input type="text" name="lastName" class="form-control" data-ng-model="vm.case.lastName" required/>
+                        <span class="errorMessage" ng-show="editForm.lastName.$touched && editForm.lastName.$invalid">
+                            Last name is required
+                        </span>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col-md-2">
+            Gender:
+          </div>
+          <div class="col-md-10">
+            <div class="radio">
+              <label class="radio">
+                <input type="radio" name="gender" value="Male"
+                       data-ng-checked="vm.case.gender == 'Male'"
+                       data-ng-model="vm.case.gender"/>
+                Male
+              </label>
+            </div>
+            <div class="radio">
+              <label class="radio">
+                <input type="radio" name="gender" value="Female"
+                       data-ng-checked="vm.case.gender == 'Female'"
+                       data-ng-model="vm.case.gender"/>
+                Female
+                <br/>
+              </label>
+            </div>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col-md-2">
+            Email:
+          </div>
+          <div class="col-md-10">
+            <!-- allowInvalid added below so that the model isn't wiped
+            out (the default behavior) if email is determined to be invalid due to being a duplicate-->
+            <input type="text" name="email"
+                   class="form-control"
+                   data-ng-model="vm.case.email"
+                   data-ng-model-options="{ updateOn: 'blur', allowInvalid: true }"
+                   data-wc-unique
+                   data-wc-unique-key="{{vm.case.id}}"
+                   data-wc-unique-property="email"
+                   data-ng-minlength="3"
+                   required/>
+            <!-- Show error if touched and unique is in error -->
+                        <span class="errorMessage" ng-show="editForm.email.$touched && editForm.email.$error.unique">
+                            Email already in use
+                        </span>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col-md-2">
+            Address:
+          </div>
+          <div class="col-md-10">
+            <input type="text" name="address" class="form-control" data-ng-model="vm.case.address" required/>
+                        <span class="errorMessage" ng-show="editForm.address.$touched && editForm.address.$invalid">
+                            Address is required
+                        </span>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col-md-2">
+            City:
+          </div>
+          <div class="col-md-10">
+            <input type="text" name="city" class="form-control" data-ng-model="vm.case.city" required/>
+                        <span class="errorMessage" ng-show="editForm.city.$touched && editForm.city.$invalid">
+                            City is required
+                        </span>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col-md-2">
+            State:
+          </div>
+          <div class="col-md-10">
+            <select name="state" required class="form-control"
+                    data-ng-model="vm.case.stateId"
+                    data-ng-options="state.id as state.name for state in vm.states">
+              <option value=""></option>
+            </select>
+                        <span class="errorMessage" ng-show="editForm.state.$touched && editForm.state.$invalid">
+                            2 character state is required
+                        </span>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col-md-2">
+            Zip:
+          </div>
+          <div class="col-md-10">
+            <input type="number" name="zip" class="form-control" data-ng-model="vm.case.zip" required/>
+                        <span class="errorMessage" ng-show="editForm.zip.$touched && editForm.zip.$invalid">
+                            Zip is required
+                        </span>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col-md-12">
+            <button type="submit" class="btn btn-primary" data-ng-click="vm.saveCase()"
+                    ng-disabled="editForm.$invalid || !editForm.$dirty">
+              {{vm.buttonText}}
+            </button>
+            &nbsp;&nbsp;
+            <button class="btn btn-danger" data-ng-if="vm.case.id > 0" data-ng-click="vm.deleteCase()">Delete
+            </button>
+          </div>
+        </div>
+        <br/>
+        <div class="statusRow">
+          <br/>
+          <div class="label label-success" data-ng-show="vm.updateStatus">
+            <span class="glyphicon glyphicon-thumbs-up icon-white"></span>&nbsp;&nbsp;Case updated!
+          </div>
+        </div>
+        <div class="statusRow">
+          <br/>
+          <div class="label label-important" data-ng-show="vm.errorMessage">
+            <span class="glyphicon glyphicon-thumbs-down icon-white"></span>&nbsp;&nbsp;Error: {{ vm.errorMessage }}
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

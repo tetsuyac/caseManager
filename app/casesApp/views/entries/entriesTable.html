@@ -1,0 +1,43 @@
+<table class="table table-hover table-striped table-condensed table-bordered entriesTable">
+  <thead>
+  <tr>
+    <th data-ng-click="vm.setOrder('product')">Product</th>
+    <th data-ng-click="vm.setOrder('date')">Date</th>
+    <th data-ng-click="vm.setOrder('quantity')">Quantity</th>
+    <th data-ng-click="vm.setOrder('price')">Unit Price</th>
+    <th data-ng-click="vm.setOrder('orderTotal')">Total</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr data-ng-hide="vm.case.entries || vm.case.entries.length > 0" class="error">
+    <td colspan="5">
+      <div class="text-center"><strong>No entries found</strong></div>
+    </td>
+  </tr>
+  <tr data-ng-repeat="order in vm.case.entries | orderBy:vm.orderby:vm.reverse" class="repeat-animation">
+    <td>
+      {{ order.product }}
+    </td>
+    <td>
+      {{ order.date | date:'MM/dd/yyyy' }}
+    </td>
+    <td>
+      {{ order.quantity }}
+    </td>
+    <td>
+      {{ order.price | currency }}
+    </td>
+    <td>
+      {{ order.orderTotal | currency }}
+    </td>
+  </tr>
+  <tr class="info">
+    <td colspan="4">
+      &nbsp;
+    </td>
+    <td>
+      <strong>{{ vm.case.entriesTotal | currency }}</strong>
+    </td>
+  </tr>
+  </tbody>
+</table>

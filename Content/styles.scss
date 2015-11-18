@@ -1,0 +1,423 @@
+$primary-color: honeydew;
+$card-back-color: #fff;
+$table-color: gray;
+$navbar-color: gray;
+$overlayContent-color: #fff;
+$white-color: gray;
+$errorMessage-color: gray;
+$white-hover-color: brown;
+$cardHeader-color: gray;
+$card-grid-Close-color: brown;
+$navbar-toggle-color: white;
+$navbar-toggle-icon-bar-color: white;
+$navbar-nav-li-a-hover-color: brown;
+$input-width: 250px;
+$casesTable-cardContainer-line-height: 3rem;
+$casesTable-gridContainer-line-height: 4rem;
+$input-boder-color:#cccccc;
+@font-face {
+	font-family: 'Roboto';
+	font-style:  normal;
+	font-weight: 300;
+	src:         local('Roboto Light'), local('Roboto-Light'), url(https://themes.googleusercontent.com/static/fonts/roboto/v9/Pru33qjShpZSmG3z6VYwnT8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+}
+@font-face {
+	font-family: 'Roboto';
+	font-style:  normal;
+	font-weight: 400;
+	src:         local('Roboto Regular'), local('Roboto-Regular'), url(https://themes.googleusercontent.com/static/fonts/roboto/v9/Xyjz-jNkfiYuJf8UC3Lizw.woff) format('woff');
+}
+@font-face {
+	font-family: 'Roboto';
+	font-style:  normal;
+	font-weight: 500;
+	src:         local('Roboto Medium'), local('Roboto-Medium'), url(https://themes.googleusercontent.com/static/fonts/roboto/v9/oOeFwZNlrTefzLYmlVV1UD8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+}
+@font-face {
+	font-family: 'Roboto';
+	font-style:  normal;
+	font-weight: 700;
+	src:         local('Roboto Bold'), local('Roboto-Bold'), url(https://themes.googleusercontent.com/static/fonts/roboto/v9/97uahxiqZRoncBaCEI3aWz8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+}
+@font-face {
+	font-family: 'Roboto';
+	font-style:  italic;
+	font-weight: 300;
+	src:         local('Roboto Light Italic'), local('Roboto-LightItalic'), url(https://themes.googleusercontent.com/static/fonts/roboto/v9/7m8l7TlFO-S3VkhHuR0at9Ih4imgI8P11RFo6YPCPC0.woff) format('woff');
+}
+@font-face {
+	font-family: 'Roboto';
+	font-style:  italic;
+	font-weight: 400;
+	src:         local('Roboto Italic'), local('Roboto-Italic'), url(https://themes.googleusercontent.com/static/fonts/roboto/v9/dFWsweFqlD8ExfyN7Gh_GPesZW2xOQ-xsNqO47m55DA.woff) format('woff');
+}
+@font-face {
+	font-family: 'Roboto';
+	font-style:  italic;
+	font-weight: 500;
+	src:         local('Roboto Medium Italic'), local('Roboto-MediumItalic'), url(https://themes.googleusercontent.com/static/fonts/roboto/v9/OLffGBTaF0XFOW1gnuHF0dIh4imgI8P11RFo6YPCPC0.woff) format('woff');
+}
+@font-face {
+	font-family: 'Roboto';
+	font-style:  italic;
+	font-weight: 700;
+	src:         local('Roboto Bold Italic'), local('Roboto-BoldItalic'), url(https://themes.googleusercontent.com/static/fonts/roboto/v9/t6Nd4cfPRhZP44Q5QAjcC9Ih4imgI8P11RFo6YPCPC0.woff) format('woff');
+}
+html {
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+body {
+	font-family: 'Roboto'
+}
+.logo {
+	height: 2rem;
+}
+#ng-view {
+	position:    relative;
+	padding-top: 50px;
+}
+#nav-login {
+	margin-left: 30px;
+}
+.appTitle {
+	line-height: 50px;
+}
+.view {
+
+}
+.white {
+	color: $white-color;
+}
+.white:hover {
+	color:           $white-hover-color;
+	text-decoration: none;
+}
+.nav-wrapper {
+	width:    100%;
+	.dig-box {
+		width:   50%;
+/*		display: inline-block;*/
+/*		float:   right;*/
+		overflow: hidden;
+	}
+}
+.dig-box .wide-wrapper {
+	width: 300px;
+	span {
+		line-height: 3.4rem;
+		float: left;
+		font-weight: 700;
+		height: 3rem;
+		vertical-align: middle;
+		padding-right: 2rem;
+	}
+	.pad {
+		display: inline-block;
+		width:3rem;
+		float:left;
+	}
+	input {
+		width:80%;
+		padding: 0;
+		border: 1px solid $input-boder-color;
+	}
+}
+
+.card {
+	background-color: $card-back-color;
+	border:           1px solid #d4d4d4;
+	margin-bottom:    20px;
+	position:         relative;
+}
+.cardHeaderWrapper {
+	height:           3rem;
+	background-color: $primary-color;
+}
+.cardHeader {
+	font-size:     14pt;
+	color:         $cardHeader-color;
+	padding:       2px 0 0 4px;
+	width:         90%;
+	float:         left;
+	white-space:   nowrap;
+	overflow:      hidden;
+	text-overflow: ellipsis;
+}
+.cardContainer {
+	width: 85%;
+	.cardImage {
+		height:     $casesTable-cardContainer-line-height;
+		margin-top: 1rem;
+	}
+	.cardClose {
+		background-color: $cardHeader-color;
+		font-size:        3rem;
+		color:            $cardHeader-color;
+		background-color: $primary-color;
+		font-weight:      bold;
+		margin-right:     5px;
+	}
+}
+.gridContainer {
+	.cardImage {
+		height: $casesTable-gridContainer-line-height;
+	}
+	.gridClose {
+		color:        $card-grid-Close-color;
+		font-weight:  bold;
+		margin-right: 5px;
+	}
+}
+.cardBody {
+	padding-left: 5px;
+}
+.cardBodyLeft {
+	margin-top: -5px;
+}
+.cardBodyRight {
+	margin-left: 20px;
+	margin-top:  2px;
+}
+.cardBodyContent {
+	/*	width: 100px;*/
+}
+.lastRow {
+	background-color: #ccc;
+}
+.indent {
+	margin-left: 5px;
+}
+.entriesTable {
+	width: 85%;
+}
+.entries th, .cases th {
+	width:  20%;
+	cursor: pointer;
+}
+.container .casesTable th, .container .casesTable td {
+	vertical-align: middle;
+	line-height:    $casesTable-gridContainer-line-height;
+}
+.entriesTable tr:first-child th, .casesTable tr:first-child th {
+	background-color: $primary-color;
+	color:            $table-color;
+	font-weight:      bold;
+}
+.gridContainer td {
+	vertical-align: middle;
+}
+#submitCase {
+	margin-left: 50px;
+	margin-top:  -8px;
+}
+footer {
+	margin-top:  10px;
+	font-weight: bold;
+}
+form[name='editForm'] {
+	width: auto;
+}
+/*.container .caseEdit input[name='case'] {
+	width:auto;
+}*/
+.caseEdit input[type='text'],
+.caseEdit input[type='number'],
+.caseEdit input[type='email'],
+.caseEdit select,
+.login input[type='text'],
+.login input[type='email'],
+.login input[type='password'] {
+	width: $input-width;
+}
+.statusRow {
+	height: 50px;
+}
+/* Bootstrap overrides */
+
+/* Added to fix Bootstrap 3 issue with Angular UI Bootstrap modal dialog*/
+.modal {
+	display:    block;
+	overflow:   hidden;
+	overflow-y: hidden;
+}
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+	background-color: $primary-color;
+	border-color:     $primary-color;
+}
+.cardContainer .col-md-3 {
+	padding-left: 0px;
+}
+.gridContainer div {
+	padding-left: 0px;
+}
+.navbar-brand {
+	float: none;
+}
+a.navbar-brand {
+	color: $navbar-color;
+}
+.navbar-inner {
+	padding-left:          0px;
+	-webkit-border-radius: 0px;
+	border-radius:         0px;
+	-webkit-box-shadow:    none;
+	-moz-box-shadow:       none;
+	box-shadow:            none;
+	background-color:      $primary-color;
+	background-image:      none;
+}
+.navbar-inner.toolbar {
+	background-color: #fafafa;
+}
+.navbar-inner.footer {
+	background-color:   #fafafa;
+	-webkit-box-shadow: none;
+	-moz-box-shadow:    none;
+	box-shadow:         none;
+	height:             50px;
+}
+.navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus {
+	background-color:   #efefef;
+	-webkit-box-shadow: none;
+	box-shadow:         none;
+	color:              #808080;
+}
+.navbar .nav li.toolbaritem a:hover, .navbar .nav li a:hover {
+	color: $navbar-nav-li-a-hover-color;
+}
+.navbar .nav > li {
+	cursor: pointer;
+}
+.navbar .nav > li > a {
+	color:               $navbar-color;
+	font-weight:         bold;
+	-webkit-text-shadow: none;
+	text-shadow:         none;
+	height:              30px;
+	padding-top:         6px;
+	padding-bottom:      0px;
+}
+.navbar .nav > li.toolbaritem > a {
+	color:               black;
+	font-weight:         bold;
+	-webkit-text-shadow: none;
+	text-shadow:         none;
+}
+.navbar-fixed-top .navbar-inner,
+.navbar-static-top .navbar-inner {
+	-webkit-box-shadow: 0 1px 00px rgba(0, 0, 0, 0);
+	-moz-box-shadow:    0 1px 00px rgba(0, 0, 0, 0);
+	box-shadow:         0 1px 00px rgba(0, 0, 0, 0);
+}
+.nav.navBarPadding {
+	margin-left: 25px;
+	margin-top:  10px;
+}
+.navbarText {
+	font-weight: bold;
+}
+.navbar .brand {
+	margin-top:          2px;
+	color:               $navbar-color;
+	-webkit-text-shadow: none;
+	text-shadow:         none;
+}
+.navbar-toggle {
+	border: 1px solid $navbar-toggle-color;
+}
+.navbar-toggle .icon-bar {
+	background-color: $navbar-toggle-icon-bar-color;
+}
+.close {
+	font-size: 15pt;
+	opacity:   1.0;
+}
+.modal-backdrop, .modal-backdrop.fade.in {
+	opacity: 0.5;
+	filter:  alpha(opacity=50);
+}
+.btn.active {
+	background-color: #f7f7f7;
+}
+/* ng-cloak */
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng.ng-cloak {
+	display: none;
+}
+.novalidate:not.dig-box {
+	border-left: none !important;
+}
+input.ng-invalid, select.ng-invalid, input.ng-invalid-required, select.ng-invalid-required {
+	border-left: 5px solid #E03930;
+}
+input.ng-valid, select.ng-valid, input.ng-valid-required, select.ng-valid-required {
+	border-left: 5px solid #57A83F;
+}
+.errorMessage {
+	position:         absolute;
+	padding:          5px;
+	background-color: #E03930;
+	color:            $errorMessage-color;
+	top:              0px;
+	left:             270px;
+}
+.editIcon {
+	margin-top: 2px;
+}
+.pagination li {
+	cursor: pointer;
+}
+/* wcOverlay directive CSS styles */
+.overlayContainer {
+	display: none;
+}
+.overlayBackground {
+	top:              0px;
+	left:             0px;
+	padding-left:     100px;
+	position:         absolute;
+	z-index:          1000;
+	height:           100%;
+	width:            100%;
+	background-color: #808080;
+	opacity:          0.3;
+}
+.overlayContent {
+	position:         absolute;
+	border:           1px solid #000;
+	background-color: $overlayContent-color;
+	font-weight:      bold;
+	height:           100px;
+	width:            300px;
+	z-index:          1000;
+	text-align:       center;
+}
+@media screen and (max-width: 640px) {
+
+	navbar-toggle {
+		display: none;
+	}
+
+	#ng-view {
+		padding-top: 90px;
+	}
+
+	.navbar-brand {
+		font-size: 12pt;
+	}
+
+	.nav.navBarPadding {
+		margin-left: -10px;
+	}
+
+	.nav > li > a {
+		padding-right: 5px;
+		padding-left:  5px;
+	}
+
+}

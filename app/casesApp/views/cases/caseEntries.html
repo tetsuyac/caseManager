@@ -1,0 +1,24 @@
+<div class="entries view">
+  <div class="container">
+    <header>
+      <h3><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;Case Entries</h3>
+    </header>
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+          <div>
+            <h4>{{vm.case.case}} : <a href="#/caseedit/{{vm.case.id}}">
+              {{ vm.case.firstName + ' ' + vm.case.lastName }} <i class="icon-edit editIcon"></i></a>
+            </h4>
+            {{vm.case.address}}
+            <br/>
+            {{vm.case.city}}, {{vm.case.state.name}}
+            <br/><br/>
+          </div>
+          <div data-ng-include="'/app/casesApp/views/entries/entriesTable.html'"
+               data-ng-controller="OrderChildController as vm"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
