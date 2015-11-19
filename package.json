@@ -39,7 +39,7 @@
     "phantomjs": "^1.9.17"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "node server/server.js"
   },
-  "main": "server.js"
+  "main": "server/server.js"
 }
