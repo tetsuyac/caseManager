@@ -17,13 +17,14 @@ module.exports = {
   dbPort:"27017",
   dbConn:function() {
     return (function() {
+      if (process.env.OPENSHIFT_MONGODB_DB_URL)
+        return process.env.OPENSHIFT_MONGODB_DB_URL + this.dbName;
       return 'mongodb://' + this.dbHost + ':' + this.dbPort + '/' + this.dbName;
     }.bind(module.exports))();
   },
   myEventID:       null,
   startup:         function (dbToUse) {
     mongoose.connect(dbToUse);
-    // Check connection to mongoDB
     mongoose.connection.on('open', function () {
       console.log('We have connected to mongodb');
     });
@@ -171,13 +172,13 @@ module.exports = {
   },
   checkUnique:     function (id, property, value, callback) {
     console.log('*** accessDB.checkUnique');
-    console.log(id + ' ' + value)
+    console.log(id + ' ' + value);
     switch (property) {
     case 'email':
       Case.findOne({'email': value, 'id': {$ne: id}})
         .select('email')
         .exec(function (err, acase) {
-          console.log(acase)
+          console.log(acase);
           var status = (acase) ? false : true;
           callback(null, {status: status});
         });
