@@ -24,6 +24,10 @@ module.exports = {
   },
   myEventID:       null,
   startup:         function (dbToUse) {
+/*    mongoose.connect(
+      dbToUse, {
+      user: 'admin',
+      pass: '12345'});*/
     mongoose.connect(dbToUse);
     mongoose.connection.on('open', function () {
       console.log('We have connected to mongodb');
