@@ -13,7 +13,7 @@ caseManager.2 Nov/18/2015, Tetsuya Chiba
 1. \> load("initMongoData.js")
 1. \> exit
 1. node server.js (node.js needs to be started already)
-1. http://localhost:3000/ (once asked, password is 6 characters or more)
+1. http://localhost:8080/ (once asked, password is 6 characters or more)
 1. have a fun!
 
 * a case can be created / edited / searched / deleted.
